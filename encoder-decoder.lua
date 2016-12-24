@@ -632,6 +632,12 @@ function train(model, my_criterion, value_criterion, batches_train_data, batches
 			print('Evaluating end ...')
 			eval_policy_net_losses = {}
 			eval_val_net_losses = {}
+			if opt.gpu_id >= 0 then
+				hred_enc:cuda()
+				dec_and_val_net:cuda()
+				hred_enc_rnn:cuda()
+				dec_rnn:cuda()
+			end
 		end
 		collectgarbage()
 	end
