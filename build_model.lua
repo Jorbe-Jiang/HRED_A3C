@@ -131,7 +131,7 @@ function build()
 		print('Loading model from: '..opt.load_model_file..'...')
 		local model_and_opts = torch.load(opt.load_model_file)
 		local model, model_opt = model_and_opts[1], model_and_opts[2]
-		opt = model_opt
+		--opt = model_opt
 		
 		--load the model components
 		hred_enc = model[1]:double()
