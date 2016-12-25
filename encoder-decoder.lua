@@ -299,19 +299,6 @@ function train(model, my_criterion, value_criterion, batches_train_data, batches
 		collectgarbage()
 
 		local seq_len = dec_inputs[2]:size(1)
-
-		local f_inputs = torch.Tensor(seq_len, opt.batch_size, opt.vocab_size):fill(0.0)
-		for i = 1, seq_len do
-			for j = 1, opt.batch_size do
-				if torch.sum(actions[{i, j}]) > 0 then
-					for k = 1, opt.top_k_actions do
-						local action = actions[{i, j, k}]
-						local f_input = dec_output[{i, j, action}]
-						f_inputs[{i, j, action}] = f_input
-					end
-				end
-			end
-		end
 		
 		local advantage_values = torch.Tensor(seq_len, opt.batch_size, opt.vocab_size):fill(0.0)
 		local val_net_q_ts = torch.Tensor(seq_len, opt.batch_size):fill(0.0)
